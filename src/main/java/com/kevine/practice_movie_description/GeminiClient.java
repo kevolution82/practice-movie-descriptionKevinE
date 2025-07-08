@@ -25,8 +25,18 @@ public class GeminiClient {
     // this feeds the AI a prompt to come up with a description for whatever movie I tell it in Postman
     public String generateDescription(String title) {
         String prompt = "Come up with a short description for a film titled \"" + title + "\".";
+        return sendPrompt(prompt);
+    }
+    
+        // feeds the AI a prompt to make a short review
+        public String generateReview(String title) {
+            String prompt = "Come up with a short movie review for a film titled \"" + title + "\".";
+            return sendPrompt(prompt);
+        }
 
-        String jsonRequest = "{ \"contents\": [ { \"parts\": [ { \"text\": " + quote(prompt) + " } ] } ] }";
+        // generic method to send any prompt
+        private String sendPrompt(String prompt) {
+            String jsonRequest = "{ \"contents\": [ { \"parts\": [ { \"text\": " + quote(prompt) + " } ] } ] }";
 
         RequestBody body = RequestBody.create(
                 jsonRequest,
